@@ -13,7 +13,7 @@ public class MainClass {
 //		tableName = MsgCode.Product;
 //		tableName = MsgCode.Price;
 //		tableName = MsgCode.Order_Response;
-		tableName = MsgCode.Stock;
+		tableName = MsgCode.Stock; 
 
 		//webmethod ¡æ Excel ¡æ Insert Query
 //		String result = wte.makeExcelData(filePath);	etiq.makeInsertQuery(result, tableName);
