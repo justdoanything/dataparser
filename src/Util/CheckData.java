@@ -34,7 +34,7 @@ public class CheckData {
 			 */
 			for (int i = 0; i < index; i++) {
 				if (arr[i].contains("Fail : There are failed data")) {
-//					System.out.println(arr[i-1]);
+					System.out.println(arr[i-1]);
 					bw.write(arr[i-1]); bw.write("\n");
 				}
 			}
