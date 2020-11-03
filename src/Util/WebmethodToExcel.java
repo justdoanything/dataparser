@@ -1,3 +1,4 @@
+package Util;
 import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -11,7 +12,8 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class JSONToExcel {
+public class WebmethodToExcel {
+
 	public String makeExcelData(String FilePath) {
 		BufferedReader br = null;
 		BufferedWriter bw = null;
@@ -26,18 +28,26 @@ public class JSONToExcel {
 
 			// 파일 읽기
 			String line;
-			JSONArray dataList = new JSONArray();
+			String[] arr = new String[5000];
+			ArrayList<String> keyList = new ArrayList<>();
+			int index = 0;
+
 			while ((line = br.readLine()) != null) {
-				dataList.put(line);
+				arr[index++] = line;
 			}
 
 			// KeyList 만들기
-			ArrayList<String> keyList = new ArrayList<>();
-			for (Object data : dataList) {
-				JSONObject json = new JSONObject(data.toString());
-				for (String key : json.keySet()) {
-					if (!keyList.contains(key))
-						keyList.add(key);
+			for (int cnt = 0; cnt < index; cnt++) {
+				JSONObject message = new JSONObject(arr[cnt]);
+				JSONObject messageHeader = (JSONObject) message.get("MessageHeader");
+				JSONObject messageBody = (JSONObject) message.get("MessageBody");
+				JSONArray dataList = (JSONArray) messageBody.get("ContentList");
+
+				for (Object data : dataList) {
+					for (String key : ((JSONObject) data).keySet()) {
+						if (!keyList.contains(key))
+							keyList.add(key);
+					}
 				}
 			}
 
@@ -56,26 +66,31 @@ public class JSONToExcel {
 			bw.write("\n");
 
 			// 데이터 출력
-			for (Object data : dataList) {
-				JSONObject json = new JSONObject(data.toString());
-				for (int i = 0; i < keyList.size(); i++) {
-					String key = keyList.get(i);
-					if (json.isNull(key)) {
-						System.out.print("");
-						bw.write("");
-					} else {
-						System.out.print(json.get(key));
-						bw.write(json.getString(key));
-					}
-					if (i != keyList.size() - 1) {
-						System.out.print("\t");
-						bw.write("\t");
-					}
-				}
-				System.out.println();
-				bw.write("\n");
-			}
+			for (int cnt = 0; cnt < index; cnt++) {
+				JSONObject message = new JSONObject(arr[cnt]);
+				JSONObject messageHeader = (JSONObject) message.get("MessageHeader");
+				JSONObject messageBody = (JSONObject) message.get("MessageBody");
+				JSONArray dataList = (JSONArray) messageBody.get("ContentList");
 
+				for (Object data : dataList) {
+					for (int i = 0; i < keyList.size(); i++) {
+						String key = keyList.get(i);
+						if (((JSONObject) data).isNull(key)) {
+							System.out.print("");
+							bw.write("");
+						} else {
+							System.out.print(((JSONObject) data).get(key));
+							bw.write(((JSONObject) data).getString(key));
+						}
+						if (i != keyList.size() - 1) {
+							System.out.print("\t");
+							bw.write("\t");
+						}
+					}
+					System.out.println();
+					bw.write("\n");
+				}
+			}
 			bw.close();
 
 			Desktop.getDesktop().edit(new File(writeFilePath));

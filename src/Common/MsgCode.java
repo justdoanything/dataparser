@@ -1,3 +1,4 @@
+package Common;
 
 public class MsgCode {
 	public static final String Product = "INSERT INTO xxinvs_model_s_if(";
