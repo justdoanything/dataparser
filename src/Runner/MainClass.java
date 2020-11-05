@@ -14,27 +14,27 @@ public class MainClass {
 		JSONToExcel jte = new JSONToExcel();
 		CheckData cd = new CheckData();
 		
-		String filePath = "C:\\Users\\82736\\Desktop\\DG_STOCK.txt";
+		String filePath = "C:\\Users\\82736\\Desktop\\test.txt";
 		String tableName = "";
+		boolean autoFileOpen = false;
 
 //		tableName = MsgCode.Product;
 //		tableName = MsgCode.Price;
-//		tableName = MsgCode.Order_Response;
-		tableName = MsgCode.Stock; 
+		tableName = MsgCode.Order_Response;
+//		tableName = MsgCode.Stock; 
 
 		//webmethod ¡æ Excel ¡æ Insert Query
-//		String result = wte.makeExcelData(filePath);	etiq.makeInsertQuery(result, tableName);
+		String result = wte.makeExcelData(filePath, autoFileOpen);	etiq.makeInsertQuery(result, tableName, autoFileOpen);
 		
 		//JSON ¡æ Excel Form
-//		jte.makeExcelData(filePath);
+//		jte.makeExcelData(filePath, autoFileOpen);
 		
 		//webmethod ¡æ Excel Form
-//		result = wte.makeExcelData(filePath);
+//		result = wte.makeExcelData(filePath, autoFileOpen);
 		
 		//Excel ¡æ Insert Query
-		etiq.makeInsertQuery(filePath, tableName);
+//		etiq.makeInsertQuery(filePath, tableName, autoFileOpen);
 		
-//		String path1 = "C:\\Users\\82736\\Desktop\\1webmethod-ecss-20201027.txt";
-//		cd.checking(path1);
+//		cd.checking(filePath, autoFileOpen);
 	}
 }

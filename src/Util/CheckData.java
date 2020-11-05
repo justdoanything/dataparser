@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class CheckData {
 
-	public void checking(String filePath) {
+	public void checking(String filePath, boolean autoFileOpen) {
 		BufferedReader br = null;
 		BufferedWriter bw = null;
 		try {
@@ -40,7 +40,7 @@ public class CheckData {
 			}
 
 			bw.close();
-			Desktop.getDesktop().edit(new File(writeFilePath));
+			if(autoFileOpen) Desktop.getDesktop().edit(new File(writeFilePath));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

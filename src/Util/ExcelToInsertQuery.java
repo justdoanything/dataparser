@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class ExcelToInsertQuery {
 
-	public static void makeInsertQuery(String FilePath, String tableName) {
+	public static void makeInsertQuery(String FilePath, String tableName, boolean autoFileOpen) {
 		BufferedReader br = null;
 		BufferedWriter bw = null;
         try {      	
@@ -51,7 +51,7 @@ public class ExcelToInsertQuery {
     			bw.write("\n");
     		}
     		bw.close();
-    		Desktop.getDesktop().edit(new File(writeFilePath));
+    		if(autoFileOpen) Desktop.getDesktop().edit(new File(writeFilePath));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

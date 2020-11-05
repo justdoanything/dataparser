@@ -14,7 +14,7 @@ import org.json.JSONObject;
 
 public class WebmethodToExcel {
 
-	public String makeExcelData(String FilePath) {
+	public String makeExcelData(String FilePath, boolean autoFileOpen) {
 		BufferedReader br = null;
 		BufferedWriter bw = null;
 
@@ -93,7 +93,7 @@ public class WebmethodToExcel {
 			}
 			bw.close();
 
-			Desktop.getDesktop().edit(new File(writeFilePath));
+			if(autoFileOpen) Desktop.getDesktop().edit(new File(writeFilePath));
 			return writeFilePath;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
