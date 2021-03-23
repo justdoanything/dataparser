@@ -3,6 +3,7 @@ package Runner;
 import Common.MsgCode;
 import Util.CheckData;
 import Util.ExcelToInsertQuery;
+import Util.ExcelToInsertQuery_bulk;
 import Util.JSONToExcel;
 import Util.WebmethodToExcel;
 
@@ -13,8 +14,9 @@ public class MainClass {
 		ExcelToInsertQuery etiq = new ExcelToInsertQuery();
 		JSONToExcel jte = new JSONToExcel();
 		CheckData cd = new CheckData();
+		ExcelToInsertQuery_bulk bulk = new ExcelToInsertQuery_bulk();
 		
-		String filePath = "D:\\01.OBS\\21.ÀÌ¿ë¿ì\\40.Interface\\30 Rollout\\21 GP2\\SA\\product.txt";
+		String filePath = "C:\\Users\\82736\\Desktop\\11new 1.txt";
 		String tableName = "";
 		boolean autoFileOpen = false;
 
@@ -30,7 +32,8 @@ public class MainClass {
 //		result = wte.makeExcelData(filePath, autoFileOpen);
 		
 		//Excel ¡æ Insert Query
-		etiq.makeInsertQuery(filePath, tableName, autoFileOpen);
+//		etiq.makeInsertQuery(filePath, tableName, autoFileOpen);
+		bulk.makeInsertQuery(filePath, tableName, autoFileOpen);
 		
 //		cd.checking(filePath, autoFileOpen);
 	}
